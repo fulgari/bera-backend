@@ -1,0 +1,22 @@
+{
+  "name": "bera-backend",
+  "version": "0.0.1",
+  "description": "Backend service for Bera App, an Kanban-like daily task management app for developers.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pzij/bera-backend.git"
+  },
+  "keywords": [
+    "productivity"
+  ],
+  "author": "Johnny Pan (pzij)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pzij/bera-backend/issues"
+  },
+  "homepage": "https://github.com/pzij/bera-backend#readme"
+}
