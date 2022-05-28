@@ -4,7 +4,10 @@
   "description": "Backend service for Bera App, an Kanban-like daily task management app for developers.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": ">=12.0.0"
   },
   "repository": {
     "type": "git",
@@ -18,5 +21,9 @@
   "bugs": {
     "url": "https://github.com/pzij/bera-backend/issues"
   },
-  "homepage": "https://github.com/pzij/bera-backend#readme"
+  "homepage": "https://github.com/pzij/bera-backend#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "express": "^4.18.1"
+  }
 }
