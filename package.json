@@ -4,7 +4,8 @@
   "description": "Backend service for Bera App, an Kanban-like daily task management app for developers.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "engines": {
     "node": ">=12.0.0"
@@ -24,6 +25,16 @@
   "homepage": "https://github.com/pzij/bera-backend#readme",
   "dependencies": {
     "body-parser": "^1.20.0",
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.20.1"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.18.2",
+    "babel-jest": "^28.1.0",
+    "jest": "^28.1.0",
+    "msw": "^0.41.1",
+    "node-fetch": "^2.6.7",
+    "ts-jest": "^28.0.3"
   }
 }
