@@ -11,12 +11,12 @@ app.get("/", (req, res, next) => {
 `);
 });
 
-app.get("/user", (req, res, next) => {
-  res.status(200);
-  res.json({
-    message: "success",
-    username: "admin",
-  });
-});
+// app.get("/user", (req, res, next) => {
+//   res.status(200);
+//   res.json({
+//     message: "success",
+//     username: "admin",
+//   });
+// });
 
 module.exports = app;
