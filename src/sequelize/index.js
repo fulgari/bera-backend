@@ -1,14 +1,33 @@
 const { Sequelize } = require("sequelize");
 const { applyExtraSetup } = require("./extra-setup");
+const dbConfig = require("../database/mysql-example-database/config/db.config");
 
 // In a real app, you should keep the database connection URL as an environment variable.
 // But for this example, we will just use a local SQLite database.
 // const sequelize = new Sequelize(process.env.DB_CONNECTION_URL);
-const sequelize = new Sequelize({
-  dialect: "sqlite",
-  storage: "sqlite-example-database/example-db.sqlite",
-  logQueryParameters: true,
-  benchmark: true,
+
+/**
+ * Using sqlite
+ */
+// const sequelize = new Sequelize({
+//   dialect: "sqlite",
+//   storage: "sqlite-example-database/example-db.sqlite",
+//   logQueryParameters: true,
+//   benchmark: true,
+// });
+
+/**
+ * Using mysql
+ */
+const sequelize = new Sequelize(dbConfig.db, dbConfig.user, dbConfig.password, {
+  host: dbConfig.host,
+  dialect: dbConfig.dialect,
+  pool: {
+    max: dbConfig.pool.max,
+    min: dbConfig.pool.min,
+    acquire: dbConfig.pool.acquire,
+    idle: dbConfig.pool.idle,
+  },
 });
 
 const modelDefiners = [

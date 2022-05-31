@@ -1,4 +1,6 @@
-const sequelize = require("../sequelize");
+const sequelize = require("../../sequelize");
+const mysql = require("mysql2/promise");
+const dbConfig = require("../mysql-example-database/config/db.config");
 const { pickRandom, randomDate } = require("./helpers/random");
 
 async function reset() {

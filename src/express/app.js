@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 const routes = {
   users: require("./routes/users.js"),
@@ -11,7 +12,13 @@ const routes = {
 
 const app = express();
 
+var corsOptions = {
+  origin: "http://localhost:9001",
+};
+app.use(cors(corsOptions));
+// parse requests of content-type - application/json
 app.use(bodyParser.json());
+// parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded());
 
 // We create a wrapper to workaround async errors not being transmitted correctly.
