@@ -22,5 +22,23 @@ module.exports = (sequelize) => {
         is: /^\w{3,}$/,
       },
     },
+    password: {
+      allowNull: false,
+      type: DataTypes.STRING,
+      validate: {
+        // We require usernames to have length of at least 6, and
+        // only use letters, numbers and underscores.
+        is: /^\w{6,}$/,
+      },
+    },
+    email: {
+      allowNull: true,
+      type: DataTypes.STRING,
+      validate: {
+        // We require usernames to have length of at least 6, and
+        // only use letters, numbers and underscores.
+        is: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+      },
+    },
   });
 };

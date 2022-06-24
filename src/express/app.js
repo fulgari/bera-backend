@@ -4,7 +4,7 @@ const cors = require("cors");
 
 const routes = {
   users: require("./routes/users.js"),
-  // instruments: require("./routes/instruments"),
+  kanban: require("./routes/kanban.js"),
   // orchestras: require("./routes/orchestras"),
   // Add more routes here...
   // items: require('./routes/items'),

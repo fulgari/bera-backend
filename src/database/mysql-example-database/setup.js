@@ -18,10 +18,17 @@ async function reset() {
   await sequelize.sync({ force: true });
 
   await sequelize.models.user.bulkCreate([
-    { username: "jack-sparrow" },
-    { username: "white-beard" },
-    { username: "black-beard" },
-    { username: "brown-beard" },
+    { username: "admin", password: "admin", email: "admin@bera.com" },
+    { username: "jack-sparrow", password: "123123", email: "js@bera.com" },
+    { username: "white-beard", password: "123123", email: "wb@bera.com" },
+    { username: "black-beard", password: "123123", email: "bb@bera.com" },
+    { username: "brown-beard", password: "123123", email: "bb2@bera.com" },
+  ]);
+
+  await sequelize.models.kanban.bulkCreate([
+    { title: "work", userId: 1 },
+    { title: "learn", userId: 1 },
+    { title: "fish", userId: 2 },
   ]);
 
   // await sequelize.models.orchestra.bulkCreate([
