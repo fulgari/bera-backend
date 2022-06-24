@@ -13,7 +13,7 @@ const routes = {
 const app = express();
 
 var corsOptions = {
-  origin: "http://localhost:9001",
+  origin: "http://localhost:9004",
 };
 app.use(cors(corsOptions));
 // parse requests of content-type - application/json
