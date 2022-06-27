@@ -31,6 +31,12 @@ async function reset() {
     { title: "fish", userId: 2 },
   ]);
 
+  await sequelize.models.todorecord.bulkCreate([
+    { title: "todo 1", description: "check check", kanbanId: 1 },
+    { title: "todo 2", kanbanId: 1 },
+    { title: "todo 3", kanbanId: 2 },
+  ]);
+
   // await sequelize.models.orchestra.bulkCreate([
   // 	{ name: 'Jalisco Philharmonic' },
   // 	{ name: 'Symphony No. 4' },

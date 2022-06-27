@@ -5,6 +5,7 @@ const cors = require("cors");
 const routes = {
   users: require("./routes/users.js"),
   kanban: require("./routes/kanban.js"),
+  todorecord: require("./routes/todorecord.js"),
   // orchestras: require("./routes/orchestras"),
   // Add more routes here...
   // items: require('./routes/items'),

@@ -33,6 +33,7 @@ const sequelize = new Sequelize(dbConfig.db, dbConfig.user, dbConfig.password, {
 const modelDefiners = [
   require("./models/user.model"),
   require("./models/kanban.model"),
+  require("./models/todorecord.model"),
   // require('./models/instrument.model'),
   // require('./models/orchestra.model'),
   // Add more models here...
