@@ -1,5 +1,10 @@
 const { DataTypes } = require("sequelize");
 
+/**
+ * id, date, listId, note, text, done, updatedAt, createdAt, isMD, tags
+ * @param {*} sequelize 
+ */
+
 // We export a function that defines the model.
 // This function will automatically receive as parameter the Sequelize connection object.
 module.exports = (sequelize) => {
@@ -12,29 +17,41 @@ module.exports = (sequelize) => {
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
-    title: {
+    date: {
       allowNull: false,
       type: DataTypes.STRING,
     },
-    description: {
+    listId: {
       allowNull: true,
       type: DataTypes.STRING,
     },
-    state: {
+    note: {
       allowNull: true,
       type: DataTypes.STRING,
+    },
+    text: {
+      allowNull: false,
+      type: DataTypes.STRING
     },
     done: {
       allowNull: true,
       type: DataTypes.BOOLEAN,
     },
-    priority: {
-      allowNull: true,
-      type: DataTypes.STRING,
+    updatedAt: {
+      allowNull: false,
+      type: DataTypes.STRING
     },
-    dueDate: {
-      allowNull: true,
-      type: DataTypes.DATE,
+    createdAt: {
+      allowNull: false,
+      type: DataTypes.STRING
     },
+    isMD: {
+      allowNull: true,
+      type: DataTypes.BOOLEAN,
+    },
+    tags: {
+      allowNull: true,
+      type: DataTypes.STRING
+    }
   });
 };

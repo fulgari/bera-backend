@@ -1,5 +1,5 @@
 const { models } = require("../../sequelize");
-const { getIdParam } = require("../helpers");
+const { getIdParam, getDateParam } = require("../helpers");
 
 async function getAll(req, res) {
   const todorecords = await models.todorecord.findAll();
@@ -9,6 +9,20 @@ async function getAll(req, res) {
 async function getById(req, res) {
   const id = getIdParam(req);
   const todorecord = await models.todorecord.findByPk(id);
+  if (todorecord) {
+    res.status(200).json(todorecord);
+  } else {
+    res.status(404).send("404 - Not found");
+  }
+}
+
+async function getAllByDate(req, res) {
+  const date = getDateParam(req);
+  const todorecord = await models.todorecord.findAll({
+    where: {
+      date: date
+    }
+  });
   if (todorecord) {
     res.status(200).json(todorecord);
   } else {
@@ -56,6 +70,7 @@ async function remove(req, res) {
 module.exports = {
   getAll,
   getById,
+  getAllByDate,
   create,
   update,
   remove,

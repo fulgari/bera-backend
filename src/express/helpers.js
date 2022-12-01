@@ -8,4 +8,12 @@ function getIdParam(req) {
   throw new TypeError(`Invalid ':id' param: "${id}"`);
 }
 
-module.exports = { getIdParam };
+function getDateParam(req) {
+  const date = req.params.date;
+  if (/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    return date;
+  }
+  throw new TypeError(`Invalid ':date' param: "${date}"`);
+}
+
+module.exports = { getIdParam, getDateParam };

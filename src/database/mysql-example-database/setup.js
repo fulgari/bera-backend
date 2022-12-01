@@ -32,9 +32,30 @@ async function reset() {
   ]);
 
   await sequelize.models.todorecord.bulkCreate([
-    { title: "todo 1", description: "check check", kanbanId: 1 },
-    { title: "todo 2", kanbanId: 1 },
-    { title: "todo 3", kanbanId: 2 },
+    {
+      id: 1,
+      date: "2022-12-02",
+      listId: null,
+      note: null,
+      text: "和远方的朋友打声招呼。",
+      done: true,
+      updatedAt: "2022-10-06T15:22:16.369Z",
+      createdAt: "2022-10-06T15:22:16.369Z",
+      isMD: false,
+      tags: ""
+    },
+    {
+      id: 2,
+      date: "2022-12-01",
+      listId: null,
+      note: null,
+      text: "晚安吧朋友。",
+      done: true,
+      updatedAt: "2022-10-06T15:22:16.369Z",
+      createdAt: "2022-10-06T15:22:16.369Z",
+      isMD: false,
+      tags: ""
+    },
   ]);
 
   // await sequelize.models.orchestra.bulkCreate([

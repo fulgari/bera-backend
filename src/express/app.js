@@ -45,18 +45,27 @@ app.get("/", (req, res) => {
 
 // We define the standard REST APIs for each route (if they exist).
 for (const [routeName, routeController] of Object.entries(routes)) {
+  // http://localhost:9001/api/todorecord/
   if (routeController.getAll) {
     app.get(`/api/${routeName}`, makeHandlerAwareOfAsyncErrors(routeController.getAll));
   }
+  // http://localhost:9001/api/todorecord/1
   if (routeController.getById) {
     app.get(`/api/${routeName}/:id`, makeHandlerAwareOfAsyncErrors(routeController.getById));
   }
+  // get http://localhost:9001/api/todorecord/2022-12-02
+  if (routeController.getAllByDate) {
+    app.get(`/api/${routeName}/date/:date`, makeHandlerAwareOfAsyncErrors(routeController.getAllByDate));
+  }
+  // post http://localhost:9001/api/todorecord/
   if (routeController.create) {
     app.post(`/api/${routeName}`, makeHandlerAwareOfAsyncErrors(routeController.create));
   }
+  // put http://localhost:9001/api/todorecord/1
   if (routeController.update) {
     app.put(`/api/${routeName}/:id`, makeHandlerAwareOfAsyncErrors(routeController.update));
   }
+  // delete http://localhost:9001/api/todorecord/1
   if (routeController.remove) {
     app.delete(`/api/${routeName}/:id`, makeHandlerAwareOfAsyncErrors(routeController.remove));
   }
