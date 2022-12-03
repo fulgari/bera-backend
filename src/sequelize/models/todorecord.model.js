@@ -34,7 +34,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING
     },
     done: {
-      allowNull: true,
+      allowNull: false,
       type: DataTypes.BOOLEAN,
     },
     updatedAt: {

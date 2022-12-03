@@ -1,30 +1,63 @@
+const { Sequelize, Op } = require("sequelize");
 const { models } = require("../../sequelize");
-const { getIdParam, getDateParam } = require("../helpers");
+const { getIdParam, getDateParam, getPeriodParam } = require("../helpers");
 
 async function getAll(req, res) {
   const todorecords = await models.todorecord.findAll();
   res.status(200).json(todorecords);
 }
 
+/**
+ * Get a single record by id
+ * @param {*} req 
+ * @param {*} res 
+ */
 async function getById(req, res) {
   const id = getIdParam(req);
-  const todorecord = await models.todorecord.findByPk(id);
-  if (todorecord) {
-    res.status(200).json(todorecord);
+  const record = await models.todorecord.findByPk(id);
+  if (record) {
+    res.status(200).json(record);
   } else {
     res.status(404).send("404 - Not found");
   }
 }
 
+/**
+ * Get all records at the same date
+ * @param {*} req 
+ * @param {*} res 
+ */
 async function getAllByDate(req, res) {
   const date = getDateParam(req);
-  const todorecord = await models.todorecord.findAll({
+  const records = await models.todorecord.findAll({
     where: {
       date: date
     }
   });
-  if (todorecord) {
-    res.status(200).json(todorecord);
+  if (records) {
+    res.status(200).json(records);
+  } else {
+    res.status(404).send("404 - Not found");
+  }
+}
+
+/**
+ * Get all records during the periodefrom "from" date to "to" date
+ * @param {*} req 
+ * @param {*} res 
+ */
+async function getAllByPeriod(req, res) {
+  const { from, to } = getPeriodParam(req);
+  const records = await models.todorecord.findAll({
+    where: {
+      [Op.and]: [
+        {date: {[Op.gte]: from}},
+        {date: {[Op.lt]: to}}
+      ]
+    }
+  });
+  if (records) {
+    res.status(200).json(records);
   } else {
     res.status(404).send("404 - Not found");
   }
@@ -71,6 +104,7 @@ module.exports = {
   getAll,
   getById,
   getAllByDate,
+  getAllByPeriod,
   create,
   update,
   remove,
