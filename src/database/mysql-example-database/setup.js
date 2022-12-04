@@ -39,8 +39,8 @@ async function reset() {
       note: null,
       text: "和远方的朋友打声招呼。",
       done: true,
-      updatedAt: "2022-10-06T15:22:16.369Z",
-      createdAt: "2022-10-06T15:22:16.369Z",
+      modifiedAt: "1670161155541",
+      createdAt: "1670161155541",
       isMD: false,
       tags: ""
     },
@@ -51,8 +51,8 @@ async function reset() {
       note: null,
       text: "晚安吧朋友。",
       done: true,
-      updatedAt: "2022-10-06T15:22:16.369Z",
-      createdAt: "2022-10-06T15:22:16.369Z",
+      modifiedAt: "1670161155541",
+      createdAt: "1670161155541",
       isMD: false,
       tags: ""
     },

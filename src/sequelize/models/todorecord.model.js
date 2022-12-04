@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 
 /**
- * id, date, listId, note, text, done, updatedAt, createdAt, isMD, tags
+ * id, date, listId, note, text, done, modifiedAt, createdAt, isMD, tags
  * @param {*} sequelize 
  */
 
@@ -34,10 +34,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING
     },
     done: {
-      allowNull: false,
+      allowNull: true,
       type: DataTypes.BOOLEAN,
     },
-    updatedAt: {
+    modifiedAt: {
       allowNull: false,
       type: DataTypes.STRING
     },
