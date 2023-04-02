@@ -1,0 +1,44 @@
+version: '1'
+
+services:
+  mysql-docker-container:
+    image: mysql
+    container_name: mysql-docker-container
+    environment:
+      - MYSQL_USER=dbuser
+      - MYSQL_ROOT_PASSWORD=johnnypan
+      - MYSQL_DATABASE=bera_dev_db
+
+    volumes:
+      - database-volume:/var/lib/mysql
+    ports:
+      - '3306:3306'
+    networks:
+      - shared-network
+    restart: on-failure
+  bera-backend:
+    depends_on:
+      - mysql-docker-container
+    environment:
+      - NODE_ENV=development
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    container_name: bera-backend
+    expose:
+      - '9001'
+    ports:
+      - '9001:8080'
+    command: npm run start
+    networks:
+      - shared-network
+    restart: on-failure
+
+volumes:
+  database-volume:
+
+networks:
+  shared-network:
