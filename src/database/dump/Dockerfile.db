@@ -1,0 +1,9 @@
+FROM mysql
+
+ADD ./schema.sql /docker-entrypoint-initdb.d
+
+EXPOSE 3306
+
+COPY ./schema.sql /tmp
+
+CMD [ "mysqld", "--init-file=/tmp/schema.sql" ]

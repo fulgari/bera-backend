@@ -8,7 +8,9 @@ services:
       - MYSQL_USER=dbuser
       - MYSQL_ROOT_PASSWORD=johnnypan
       - MYSQL_DATABASE=bera_dev_db
-
+    build:
+      context: ./src/database/dump
+      dockerfile: Dockerfile.db
     volumes:
       - database-volume:/var/lib/mysql
     ports:
@@ -20,7 +22,7 @@ services:
     depends_on:
       - mysql-docker-container
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
     build:
       context: .
       dockerfile: Dockerfile
