@@ -17,47 +17,48 @@ async function reset() {
 
   await sequelize.sync({ force: true });
 
-  await sequelize.models.user.bulkCreate([
-    { username: "admin", password: "admin", email: "admin@bera.com" },
-    { username: "jack-sparrow", password: "123123", email: "js@bera.com" },
-    { username: "white-beard", password: "123123", email: "wb@bera.com" },
-    { username: "black-beard", password: "123123", email: "bb@bera.com" },
-    { username: "brown-beard", password: "123123", email: "bb2@bera.com" },
-  ]);
+  if (process.env.NODE_ENV !== "development") {
+    await sequelize.models.user.bulkCreate([
+      { username: "admin", password: "admin", email: "admin@bera.com" },
+      { username: "jack-sparrow", password: "123123", email: "js@bera.com" },
+      { username: "white-beard", password: "123123", email: "wb@bera.com" },
+      { username: "black-beard", password: "123123", email: "bb@bera.com" },
+      { username: "brown-beard", password: "123123", email: "bb2@bera.com" },
+    ]);
 
-  await sequelize.models.kanban.bulkCreate([
-    { title: "work", userId: 1 },
-    { title: "learn", userId: 1 },
-    { title: "fish", userId: 2 },
-  ]);
+    await sequelize.models.kanban.bulkCreate([
+      { title: "work", userId: 1 },
+      { title: "learn", userId: 1 },
+      { title: "fish", userId: 2 },
+    ]);
 
-  await sequelize.models.todorecord.bulkCreate([
-    {
-      id: 1,
-      date: "2022-12-02",
-      listId: null,
-      note: null,
-      text: "和远方的朋友打声招呼。",
-      done: true,
-      modifiedAt: "1670161155541",
-      createdAt: "1670161155541",
-      isMD: false,
-      tags: ""
-    },
-    {
-      id: 2,
-      date: "2022-12-01",
-      listId: null,
-      note: null,
-      text: "晚安吧朋友。",
-      done: true,
-      modifiedAt: "1670161155541",
-      createdAt: "1670161155541",
-      isMD: false,
-      tags: ""
-    },
-  ]);
-
+    await sequelize.models.todorecord.bulkCreate([
+      {
+        id: 1,
+        date: "2022-12-02",
+        listId: null,
+        note: null,
+        text: "和远方的朋友打声招呼。",
+        done: true,
+        modifiedAt: "1670161155541",
+        createdAt: "1670161155541",
+        isMD: false,
+        tags: ""
+      },
+      {
+        id: 2,
+        date: "2022-12-01",
+        listId: null,
+        note: null,
+        text: "晚安吧朋友。",
+        done: true,
+        modifiedAt: "1670161155541",
+        createdAt: "1670161155541",
+        isMD: false,
+        tags: ""
+      },
+    ]);
+  }
   // await sequelize.models.orchestra.bulkCreate([
   // 	{ name: 'Jalisco Philharmonic' },
   // 	{ name: 'Symphony No. 4' },

@@ -1,4 +1,4 @@
-module.exports = {
+const devConfig = {
   host: "127.0.0.1",
   user: "root",
   password: "panzijun",
@@ -12,3 +12,20 @@ module.exports = {
     idle: 10000,
   },
 };
+
+const prodConfig = {
+  host: "127.0.0.1",
+  user: "root",
+  password: "johnnypan",
+  db: "bera_prod_db",
+  dialect: "mysql",
+  port: 3306,
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000,
+  },
+}
+
+module.exports = process.env.NODE_ENV === "development" ? devConfig : prodConfig;
