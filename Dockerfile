@@ -24,6 +24,6 @@ ENV NODE_ENV=${DOCKER_ENV}
 # echo some msg
 RUN if [ "${DOCKER_ENV}" = "development" ] ; then echo "your NODE_ENV for dev is ${NODE_ENV}" ; else echo "your NODE_ENV for prod is ${NODE_ENV}" ; fi
 
-EXPOSE 8080
+EXPOSE 9001
 
 CMD [ "node", "index.js" ]
