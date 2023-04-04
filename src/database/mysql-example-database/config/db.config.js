@@ -14,9 +14,9 @@ const devConfig = {
 };
 
 const prodConfig = {
-  host: "127.0.0.1",
-  user: "root",
-  password: "johnnypan",
+  host: "mysql-docker-container",
+  user: "dbuser",
+  password: "dbuser",
   db: "bera_prod_db",
   dialect: "mysql",
   port: 3306,

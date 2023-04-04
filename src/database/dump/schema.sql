@@ -1,3 +1,11 @@
+-- Local database definition.
+
+DROP DATABASE IF EXISTS bera_prod_db;
+
+CREATE DATABASE bera_prod_db;
+
+USE bera_prod_db;
+
 -- MySQL dump 10.13  Distrib 8.0.32, for macos13.0 (arm64)
 --
 -- Host: 127.0.0.1    Database: testdb

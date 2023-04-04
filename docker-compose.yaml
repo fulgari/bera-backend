@@ -6,8 +6,10 @@ services:
     container_name: mysql-docker-container
     environment:
       - MYSQL_USER=dbuser
+      - MYSQL_PASSWORD=dbuser
       - MYSQL_ROOT_PASSWORD=johnnypan
-      - MYSQL_DATABASE=bera_dev_db
+      - MYSQL_DATABASE=bera_prod_db
+      - MYSQL_ROOT_HOST=%
     build:
       context: ./src/database/dump
       dockerfile: Dockerfile.db
@@ -23,6 +25,7 @@ services:
       - mysql-docker-container
     environment:
       - NODE_ENV=production
+      - DOCKER_ENV=production
     build:
       context: .
       dockerfile: Dockerfile
