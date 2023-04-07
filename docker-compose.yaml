@@ -1,6 +1,17 @@
 version: '1'
 
 services:
+  bera-frontend:
+    image: bera-frontend
+    container_name: bera-frontend
+    build:
+      context: ../bera-frontend
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=production
+      - DOCKER_ENV=production
+    ports:
+      - '9004:9004'
   mysql-docker-container:
     image: mysql
     container_name: mysql-docker-container
@@ -21,6 +32,8 @@ services:
       - shared-network
     restart: on-failure
   bera-backend:
+    image: bera-backend
+    container_name: bera-backend
     depends_on:
       - mysql-docker-container
     environment:
@@ -32,7 +45,6 @@ services:
     volumes:
       - ./:/usr/src/app
       - /usr/src/app/node_modules
-    container_name: bera-backend
     expose:
       - '9001'
     ports:
