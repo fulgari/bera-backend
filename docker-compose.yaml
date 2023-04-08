@@ -1,6 +1,14 @@
 version: '1'
 
 services:
+  nginx:
+    image: nginx
+    container_name: nginx
+    build:
+      context: ../bera-frontend/nginx
+      dockerfile: Dockerfile
+    ports: 
+     - '80:80'
   bera-frontend:
     image: bera-frontend
     container_name: bera-frontend
