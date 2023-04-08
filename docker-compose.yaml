@@ -5,7 +5,7 @@ services:
     image: bera-frontend
     container_name: bera-frontend
     build:
-      context: ../bera-frontend
+      context: ../bera-frontend # need to place bera-frontend project in the same folder of bera-backend project
       dockerfile: Dockerfile
     environment:
       - NODE_ENV=production
