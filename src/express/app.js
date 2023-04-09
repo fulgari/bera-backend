@@ -14,7 +14,13 @@ const routes = {
 const app = express();
 
 var corsOptions = {
-  origin: /http:\/\/localhost:(9004|80)/,
+  origin: [
+    "http://localhost:9004",
+    "http://127.0.0.1:9004",
+    "http://localhost:80",
+    "http://127.0.0.1:80",
+    "http://localhost",
+    "http://127.0.0.1"],
 };
 app.use(cors(corsOptions));
 // parse requests of content-type - application/json
