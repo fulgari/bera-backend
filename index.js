@@ -1,10 +1,3 @@
-const app = require("./src/express/app");
-const PORT = 9001;
+const app = require('./src/express/app');
 
-function init() {
-  app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`);
-  });
-}
-
-init();
+module.exports = app;
