@@ -46,3 +46,8 @@ Then serve them:
 ```
 docker-compose up
 ```
+
+
+### Dev resources
+- [MySQL](https://www.db4free.net/) for record storage
+- [MongoDb](https://www.mongodb.com/cloud/atlas) for jwt auth data storage
