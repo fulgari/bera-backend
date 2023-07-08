@@ -1,3 +1,4 @@
+const mysql2 = require("mysql2");
 const { Sequelize } = require("sequelize");
 const { applyExtraSetup } = require("./extra-setup");
 const dbConfig = require("../database/mysql-example-database/config/db.config");
@@ -19,7 +20,7 @@ const dbConfig = require("../database/mysql-example-database/config/db.config");
 /**
  * Using mysql
  */
-const sequelize = new Sequelize(dbConfig.db, dbConfig.user, dbConfig.password, {
+const options = {
   host: dbConfig.host,
   dialect: dbConfig.dialect,
   pool: {
@@ -28,7 +29,11 @@ const sequelize = new Sequelize(dbConfig.db, dbConfig.user, dbConfig.password, {
     acquire: dbConfig.pool.acquire,
     idle: dbConfig.pool.idle,
   },
-});
+};
+if (options.dialect === 'mysql') {
+  options.dialectModule = mysql2;
+}
+const sequelize = new Sequelize(dbConfig.db, dbConfig.user, dbConfig.password, );
 
 const modelDefiners = [
   require("./models/user.model"),
