@@ -33,7 +33,7 @@ const options = {
 if (options.dialect === 'mysql') {
   options.dialectModule = mysql2;
 }
-const sequelize = new Sequelize(dbConfig.db, dbConfig.user, dbConfig.password, );
+const sequelize = new Sequelize(dbConfig.db, dbConfig.user, dbConfig.password, options);
 
 const modelDefiners = [
   require("./models/user.model"),
