@@ -20,7 +20,11 @@ var corsOptions = {
     "http://localhost:80",
     "http://127.0.0.1:80",
     "http://localhost",
-    "http://127.0.0.1"],
+    "http://127.0.0.1",
+    /** prod */
+    "https://bera-frontend.vercel.app",
+    "https://bera-frontend-pzij.vercel.app"
+  ],
 };
 app.use(cors(corsOptions));
 // parse requests of content-type - application/json
