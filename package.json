@@ -37,6 +37,7 @@
   "devDependencies": {
     "@babel/preset-env": "^7.18.2",
     "babel-jest": "^28.1.0",
+    "dotenv": "^16.3.1",
     "jest": "^28.1.0",
     "msw": "^0.41.1",
     "node-fetch": "^2.6.7",

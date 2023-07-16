@@ -1,7 +1,10 @@
+const dotenv = require('dotenv');
+const env = dotenv.config().parsed;
+
 const devConfig = {
   host: "127.0.0.1",
   user: "root",
-  password: "panzijun",
+  password: process.env.DB_PASSWORD || env.DB_PASSWORD,
   db: "testdb",
   dialect: "mysql",
   port: 3306,
@@ -16,7 +19,7 @@ const devConfig = {
 const prodConfig = {
   host: "db4free.net",
   user: "beraroot",
-  password: "panzijun",
+  password: process.env.DB_PASSWORD || env.DB_PASSWORD,
   db: "bera_auth_db",
   dialect: "mysql",
   port: 3306,
