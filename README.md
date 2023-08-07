@@ -6,11 +6,19 @@ Backend service for Bera App, a Kanban-like daily task management app for develo
 
 ## Init MySQL database
 
-Install Mysql in your machine first, then run:
+[Install Mysql](https://dev.mysql.com/downloads/mysql/) in your machine first(using legacy version password), then run:
 
+```bash
+# login mysql
+$ mysql -u root -p
+
+# source schema.dev.sql file in mysql CLI, absolute path
+$ mysql > source /a/b/c/schema.dev.sql;
+
+# run the script
+$ npm run setup-mysql-db
 ```
-npm run setup-mysql-db
-```
+
 
 ## Dockerize
 
