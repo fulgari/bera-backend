@@ -8,7 +8,8 @@
     "dev": "NODE_ENV=development node index.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "setup-sqlite-db": "NODE_ENV=development node src/database/sqlite-example-database/setup.js",
-    "setup-mysql-db": "NODE_ENV=development node src/database/mysql-example-database/setup.js"
+    "setup-mysql-db": "NODE_ENV=development node src/database/mysql-example-database/setup.js",
+    "test-mongo": "node src/auth/server.js"
   },
   "engines": {
     "node": ">=12.0.0"
