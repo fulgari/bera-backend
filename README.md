@@ -2,9 +2,9 @@
 
 Backend service for Bera App, a Kanban-like daily task management app for developers.
 
-## APIs
+## Presets
 
-## Init MySQL database
+### Init MySQL database
 
 [Install Mysql](https://dev.mysql.com/downloads/mysql/) in your machine first(using legacy version password), then run:
 
@@ -18,6 +18,10 @@ $ mysql > source /a/b/c/schema.dev.sql;
 # run the script
 $ npm run setup-mysql-db
 ```
+
+### Init MongoDB
+
+Follow the [Mongo Altas Tutorial](https://cloud.mongodb.com/) to get a free plan for testing. Then check out `Security > Quickstart`, you will have to generate a username/password pair for connection. I've stored mine as `AUTH_DB_USERNAME`/`AUTH_DB_PASSWORD` in a local `.env` file.
 
 
 ## Dockerize
