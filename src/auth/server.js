@@ -13,7 +13,7 @@ const option = {
     // reconnectTries: 30000
 };
 const mongoURI = process.env.MONGODB_URI;
-const uri = `mongodb+srv://swanf:${mongoURI || env.AUTH_DB_PASSWORD}@bera-auth-db.bedrsfr.mongodb.net/?retryWrites=true&w=majority`;
+const uri = mongoURI || `mongodb+srv://${env.AUTH_DB_USERNAME}:${env.AUTH_DB_PASSWORD}@bera-auth-db.bedrsfr.mongodb.net/?retryWrites=true&w=majority`;
 mongoose.connect(uri, option).then(function(){
     //connected successfully
     console.log("Connect to mongo successfully")
