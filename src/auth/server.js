@@ -2,6 +2,7 @@
 var express = require('express'),
   app = express(),
   bodyParser = require('body-parser'),
+  User = require('./models/userModel'),
   jsonwebtoken = require("jsonwebtoken"),
   env = require('dotenv').config().parsed;
 const mongoose = require('mongoose');
