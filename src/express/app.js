@@ -1,11 +1,11 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const routes = {
-  users: require("./routes/users.js"),
-  kanban: require("./routes/kanban.js"),
-  todorecord: require("./routes/todorecord.js"),
+  users: require('./routes/users.js'),
+  kanban: require('./routes/kanban.js'),
+  todorecord: require('./routes/todorecord.js')
   // orchestras: require("./routes/orchestras"),
   // Add more routes here...
   // items: require('./routes/items'),
@@ -13,18 +13,18 @@ const routes = {
 
 const app = express();
 
-var corsOptions = {
+const corsOptions = {
   origin: [
-    "http://localhost:9004",
-    "http://127.0.0.1:9004",
-    "http://localhost:80",
-    "http://127.0.0.1:80",
-    "http://localhost",
-    "http://127.0.0.1",
+    'http://localhost:9004',
+    'http://127.0.0.1:9004',
+    'http://localhost:80',
+    'http://127.0.0.1:80',
+    'http://localhost',
+    'http://127.0.0.1',
     /** prod */
-    "https://bera-frontend.vercel.app",
-    "https://bera-frontend-pzij.vercel.app"
-  ],
+    'https://bera-frontend.vercel.app',
+    'https://bera-frontend-pzij.vercel.app'
+  ]
 };
 app.use(cors(corsOptions));
 // parse requests of content-type - application/json
@@ -33,7 +33,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
 // We create a wrapper to workaround async errors not being transmitted correctly.
-function makeHandlerAwareOfAsyncErrors(handler) {
+function makeHandlerAwareOfAsyncErrors (handler) {
   return async function (req, res, next) {
     try {
       res.setHeader('Content-Type', 'application/json');
@@ -46,7 +46,7 @@ function makeHandlerAwareOfAsyncErrors(handler) {
 }
 
 // We provide a root route just as an example
-app.get("/", (req, res) => {
+app.get('/', (req, res) => {
   res.send(`
 		<h2>Hello, Sequelize + Express!</h2>
 		<p>Make sure you have executed <b>npm run setup-example-db</b> once to have a populated example database. Otherwise, you will get <i>'no such table'</i> errors.</p>

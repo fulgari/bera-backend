@@ -4,6 +4,12 @@ Backend service for Bera App, a Kanban-like daily task management app for develo
 
 ## Presets
 
+### Installation
+
+```
+pnpm i
+```
+
 ### Init MySQL database
 
 [Install Mysql](https://dev.mysql.com/downloads/mysql/) in your machine first(using legacy version password), then run:
