@@ -1,12 +1,12 @@
-// 
-// 
+//
+//
 /**
  * Get date param `:id` from request url.
  * NB: A helper function to assert the request ID param is valid and convert it to a number (since it comes as a string by default)
- * @param {*} req 
- * @returns 
+ * @param {*} req
+ * @returns
  */
-function getIdParam(req) {
+function getIdParam (req) {
   const id = req.params.id;
   if (/^\d+$/.test(id)) {
     return Number.parseInt(id, 10);
@@ -16,10 +16,10 @@ function getIdParam(req) {
 
 /**
  * Get date param `:date` from request url
- * @param {*} req 
- * @returns 
+ * @param {*} req
+ * @returns
  */
-function getDateParam(req) {
+function getDateParam (req) {
   const date = req.params.date;
   if (isSimpleDate(date)) {
     return date;
@@ -29,11 +29,11 @@ function getDateParam(req) {
 
 /**
  * Get period params (`:from`, `:to`) from request url
- * @param {*} req 
- * @returns 
+ * @param {*} req
+ * @returns
  */
-function getPeriodParam(req) {
-  const from = req.params.from, to = req.params.to;
+function getPeriodParam (req) {
+  const from = req.params.from; const to = req.params.to;
   if (!isSimpleDate(from)) {
     throw new TypeError(`Invalid ':from' param: "${from}"`);
   }
@@ -46,7 +46,7 @@ function getPeriodParam(req) {
   }
 }
 
-function isSimpleDate(date) {
+function isSimpleDate (date) {
   return /^\d{4}-\d{2}-\d{2}$/.test(date);
 }
 

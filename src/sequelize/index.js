@@ -1,7 +1,7 @@
-const mysql2 = require("mysql2");
-const { Sequelize } = require("sequelize");
-const { applyExtraSetup } = require("./extra-setup");
-const dbConfig = require("../database/mysql-example-database/config/db.config");
+const mysql2 = require('mysql2');
+const { Sequelize } = require('sequelize');
+const { applyExtraSetup } = require('./extra-setup');
+const dbConfig = require('../database/mysql-example-database/config/db.config');
 
 // In a real app, you should keep the database connection URL as an environment variable.
 // But for this example, we will just use a local SQLite database.
@@ -27,8 +27,8 @@ const options = {
     max: dbConfig.pool.max,
     min: dbConfig.pool.min,
     acquire: dbConfig.pool.acquire,
-    idle: dbConfig.pool.idle,
-  },
+    idle: dbConfig.pool.idle
+  }
 };
 if (options.dialect === 'mysql') {
   options.dialectModule = mysql2;
@@ -36,9 +36,9 @@ if (options.dialect === 'mysql') {
 const sequelize = new Sequelize(dbConfig.db, dbConfig.user, dbConfig.password, options);
 
 const modelDefiners = [
-  require("./models/user.model"),
-  require("./models/kanban.model"),
-  require("./models/todorecord.model"),
+  require('./models/user.model'),
+  require('./models/kanban.model'),
+  require('./models/todorecord.model')
   // require('./models/instrument.model'),
   // require('./models/orchestra.model'),
   // Add more models here...

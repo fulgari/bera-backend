@@ -1,8 +1,8 @@
 module.exports = {
-  setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
-  preset: "ts-jest",
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  preset: 'ts-jest',
   transform: {
-    "^.+\\.(ts|tsx)?$": "ts-jest",
-    "^.+\\.(js|jsx)$": "babel-jest",
-  },
+    '^.+\\.(ts|tsx)?$': 'ts-jest',
+    '^.+\\.(js|jsx)$': 'babel-jest'
+  }
 };

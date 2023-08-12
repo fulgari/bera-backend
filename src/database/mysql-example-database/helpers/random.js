@@ -1,8 +1,8 @@
-function pickRandom(args) {
+function pickRandom (args) {
   return args[Math.floor(Math.random() * args.length)];
 }
 
-function randomDate() {
+function randomDate () {
   return new Date(new Date() - 200000000000 * Math.random());
 }
 

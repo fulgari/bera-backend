@@ -3,13 +3,13 @@
  * Ref: https://medium.com/loginradius/nodejs-and-mongodb-application-authentication-by-jwt-f1dc2e96baf5
  */
 'use strict';
-var mongoose = require('mongoose'),
-  bcrypt = require('bcrypt'),
-  Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const Schema = mongoose.Schema;
 /**
  * User Schema
  */
-var UserSchema = new Schema({
+const UserSchema = new Schema({
   fullName: {
     type: String,
     trim: true,
