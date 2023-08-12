@@ -1,6 +1,15 @@
+/**
+ * @ Author: pzij
+ * @ Create Time: 2023-07-31 23:21:12
+ * @ Modified by: pzij
+ * @ Modified time: 2023-08-13 00:25:06
+ * @ Description: unified entry of routes
+ */
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const { retrieveAuthMw, loginInRequiredMw } = require('../auth/index.js');
 
 const routes = {
   users: require('./routes/users.js'),
@@ -32,6 +41,9 @@ app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded());
 
+/** auth */
+app.use(retrieveAuthMw);
+
 // We create a wrapper to workaround async errors not being transmitted correctly.
 function makeHandlerAwareOfAsyncErrors (handler) {
   return async function (req, res, next) {
@@ -59,31 +71,31 @@ app.get('/', (req, res) => {
 for (const [routeName, routeController] of Object.entries(routes)) {
   // get http://localhost:9001/api/todorecord/
   if (routeController.getAll) {
-    app.get(`/api/${routeName}`, makeHandlerAwareOfAsyncErrors(routeController.getAll));
+    app.get(`/api/${routeName}`, loginInRequiredMw, makeHandlerAwareOfAsyncErrors(routeController.getAll));
   }
   // get http://localhost:9001/api/todorecord/1
   if (routeController.getById) {
-    app.get(`/api/${routeName}/:id`, makeHandlerAwareOfAsyncErrors(routeController.getById));
+    app.get(`/api/${routeName}/:id`, loginInRequiredMw, makeHandlerAwareOfAsyncErrors(routeController.getById));
   }
   // get http://localhost:9001/api/todorecord/date/2022-12-02
   if (routeController.getAllByDate) {
-    app.get(`/api/${routeName}/date/:date`, makeHandlerAwareOfAsyncErrors(routeController.getAllByDate));
+    app.get(`/api/${routeName}/date/:date`, loginInRequiredMw, makeHandlerAwareOfAsyncErrors(routeController.getAllByDate));
   }
   // get http://localhost:9001/api/todorecord/period/2022-12-01/2022-12-03
   if (routeController.getAllByPeriod) {
-    app.get(`/api/${routeName}/period/:from/:to`, makeHandlerAwareOfAsyncErrors(routeController.getAllByPeriod));
+    app.get(`/api/${routeName}/period/:from/:to`, loginInRequiredMw, makeHandlerAwareOfAsyncErrors(routeController.getAllByPeriod));
   }
   // post http://localhost:9001/api/todorecord/
   if (routeController.create) {
-    app.post(`/api/${routeName}`, makeHandlerAwareOfAsyncErrors(routeController.create));
+    app.post(`/api/${routeName}`, loginInRequiredMw, makeHandlerAwareOfAsyncErrors(routeController.create));
   }
   // put http://localhost:9001/api/todorecord/1
   if (routeController.update) {
-    app.put(`/api/${routeName}/:id`, makeHandlerAwareOfAsyncErrors(routeController.update));
+    app.put(`/api/${routeName}/:id`, loginInRequiredMw, makeHandlerAwareOfAsyncErrors(routeController.update));
   }
   // delete http://localhost:9001/api/todorecord/1
   if (routeController.remove) {
-    app.delete(`/api/${routeName}/:id`, makeHandlerAwareOfAsyncErrors(routeController.remove));
+    app.delete(`/api/${routeName}/:id`, loginInRequiredMw, makeHandlerAwareOfAsyncErrors(routeController.remove));
   }
 }
 
