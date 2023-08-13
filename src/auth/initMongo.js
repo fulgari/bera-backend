@@ -1,4 +1,3 @@
-require('./models/userModel');
 const env = require('dotenv').config().parsed;
 const mongoose = require('mongoose');
 const option = {
