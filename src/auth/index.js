@@ -2,13 +2,14 @@
  * @ Author: pzij
  * @ Create Time: 2023-08-12 20:09:10
  * @ Modified by: pzij
- * @ Modified time: 2023-08-13 00:22:10
+ * @ Modified time: 2023-08-13 12:38:54
  * @ Description: middleware callbacks that are used in express/app.js
  */
 
 const { loginRequired } = require('./controllers/userController');
 const jsonwebtoken = require('jsonwebtoken');
 const dotenv = require('dotenv').config().parsed;
+require('./initMongo');
 
 const retrieveAuthMw = function (req, res, next) {
   if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT') {
@@ -25,7 +26,7 @@ const retrieveAuthMw = function (req, res, next) {
 
 const loginInRequiredMw = loginRequired;
 
-export {
+exports.default = {
   retrieveAuthMw,
   loginInRequiredMw
 }
