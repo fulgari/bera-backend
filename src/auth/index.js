@@ -2,10 +2,11 @@
  * @ Author: pzij
  * @ Create Time: 2023-08-12 20:09:10
  * @ Modified by: pzij
- * @ Modified time: 2023-08-13 22:40:00
+ * @ Modified time: 2023-08-15 01:15:48
  * @ Description: middleware callbacks that are used in express/app.js
  */
 require('./models/userModel');
+const userRoute = require('./route/userRoute');
 const { loginRequired } = require('./controllers/userController');
 const jsonwebtoken = require('jsonwebtoken');
 const dotenv = require('dotenv').config().parsed;
@@ -28,5 +29,6 @@ const loginInRequiredMw = loginRequired;
 
 module.exports = {
   retrieveAuthMw,
-  loginInRequiredMw
+  loginInRequiredMw,
+  userRoute
 }
