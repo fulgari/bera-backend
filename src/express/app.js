@@ -2,7 +2,7 @@
  * @ Author: pzij
  * @ Create Time: 2023-07-31 23:21:12
  * @ Modified by: pzij
- * @ Modified time: 2023-08-15 01:15:18
+ * @ Modified time: 2023-08-16 12:28:01
  * @ Description: unified entry of routes
  */
 
@@ -22,9 +22,6 @@ const routes = {
 
 const app = express();
 
-/** auth */
-app.use(retrieveAuthMw);
-
 const corsOptions = {
   origin: [
     'http://localhost:9004',
@@ -43,6 +40,9 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded());
+
+/** auth */
+app.use(retrieveAuthMw);
 
 // We create a wrapper to workaround async errors not being transmitted correctly.
 function makeHandlerAwareOfAsyncErrors (handler) {
