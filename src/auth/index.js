@@ -2,7 +2,7 @@
  * @ Author: pzij
  * @ Create Time: 2023-08-12 20:09:10
  * @ Modified by: pzij
- * @ Modified time: 2023-08-16 12:52:22
+ * @ Modified time: 2023-08-16 13:09:22
  * @ Description: middleware callbacks that are used in express/app.js
  */
 require('./models/userModel');
@@ -32,6 +32,5 @@ const loginInRequiredMw = loginRequired;
 module.exports = {
   retrieveAuthMw,
   loginInRequiredMw,
-  userRoute,
-  jwtSecret
+  userRoute
 }

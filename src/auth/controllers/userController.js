@@ -4,7 +4,8 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = mongoose.model('User');
 const dotenv = require('dotenv').config().parsed;
-const { jwtSecret } = require('../index.js')
+
+const jwtSecret = process.env.JWT_SECRET;
 
 exports.register = function (req, res) {
   const newUser = new User(req.body);
