@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = mongoose.model('User');
 const dotenv = require('dotenv').config().parsed;
+const { jwtSecret } = require('../index.js')
 
 exports.register = function (req, res) {
   const newUser = new User(req.body);
@@ -25,7 +26,7 @@ exports.sign_in = function (req, res) {
     if (!user || !user.comparePassword(req.body.password)) {
       return res.status(401).json({ message: 'Authentication failed. Invalid user or password.' });
     }
-    return res.json({ token: jwt.sign({ email: user.email, fullName: user.fullName, _id: user._id }, dotenv.JWT_SECRET) });
+    return res.json({ token: jwt.sign({ email: user.email, fullName: user.fullName, _id: user._id }, jwtSecret || dotenv.JWT_SECRET) });
   }).catch(err => {
     throw err;
   });
