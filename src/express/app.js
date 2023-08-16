@@ -2,7 +2,7 @@
  * @ Author: pzij
  * @ Create Time: 2023-07-31 23:21:12
  * @ Modified by: pzij
- * @ Modified time: 2023-08-16 12:28:01
+ * @ Modified time: 2023-08-16 12:43:27
  * @ Description: unified entry of routes
  */
 
@@ -35,7 +35,7 @@ const corsOptions = {
     'https://bera-frontend-pzij.vercel.app'
   ]
 };
-app.use(cors(corsOptions));
+app.use(cors());
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
