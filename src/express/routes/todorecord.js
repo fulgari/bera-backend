@@ -161,7 +161,7 @@ async function update (req, res) {
 
 async function remove (req, res) {
   const id = getIdParam(req);
-  const [rows] = await models.todorecord.destroy({
+  const rows = await models.todorecord.destroy({
     where: {
       id
     }
