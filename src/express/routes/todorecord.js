@@ -145,7 +145,9 @@ async function update (req, res) {
     if (rows > 0) {
       res.status(200).json({
         success: true,
-        result: {}
+        result: {
+          id
+        }
       });
     } else {
       res.status(404).json({
@@ -159,7 +161,7 @@ async function update (req, res) {
 
 async function remove (req, res) {
   const id = getIdParam(req);
-  const rows = await models.todorecord.destroy({
+  const [rows] = await models.todorecord.destroy({
     where: {
       id
     }
