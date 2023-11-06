@@ -17,8 +17,8 @@ const devConfig = {
 };
 
 const prodConfig = {
-  host: 'db4free.net',
-  user: 'beraroot',
+  host: env.DB_PROD_HOST,
+  user: env.DB_PROD_USERNAME,
   password: process.env.DB_PASSWORD || env.DB_PASSWORD,
   db: 'bera_auth_db',
   dialect: 'mysql',

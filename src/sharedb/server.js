@@ -4,9 +4,14 @@ const express = require('express');
 const ShareDBMysqlMemory = require('./sharedb-mysql');
 const WebSocketJSONStream = require('@teamwork/websocket-json-stream');
 const WebSocket = require('ws');
+const dbConfig = require('../database/mysql-example-database/config/db.config');
+
+const shareDbOptions = {
+  db: { host: 'localhost', user: dbConfig.user, password: dbConfig.password, database: dbConfig.db, connectionLimit: dbConfig.pool.max }, ops_table: 'ops', snapshots_table: 'snapshots', debug: false
+}
 
 // Start ShareDB
-const share = new ShareDB({ db: new ShareDBMysqlMemory() });
+const share = new ShareDB({ db: new ShareDBMysqlMemory(shareDbOptions) });
 
 // Create a WebSocket server
 const app = express();
