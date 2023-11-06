@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/pzij/bera-backend#readme",
   "dependencies": {
+    "@teamwork/websocket-json-stream": "^2.0.0",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
@@ -38,6 +39,7 @@
     "mysql2": "^2.3.3",
     "save": "^2.9.0",
     "sequelize": "^6.20.1",
+    "sharedb": "^4.1.1",
     "sqlite3": "^5.0.8"
   },
   "devDependencies": {
