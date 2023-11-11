@@ -32,6 +32,9 @@ dependencies:
   mysql2:
     specifier: ^2.3.3
     version: registry.npmmirror.com/mysql2@2.3.3
+  ot-json0:
+    specifier: ^1.1.0
+    version: registry.npmmirror.com/ot-json0@1.1.0
   save:
     specifier: ^2.9.0
     version: registry.npmmirror.com/save@2.9.0
@@ -82,8 +85,17 @@ devDependencies:
   node-fetch:
     specifier: ^2.6.7
     version: registry.npmmirror.com/node-fetch@2.6.7
+  ot-json0-v2:
+    specifier: ottypes/json0
+    version: github.com/ottypes/json0/90a3ae26364c4fa3b19b6df34dad46707a704421
 
 packages:
+
+  github.com/ottypes/json0/90a3ae26364c4fa3b19b6df34dad46707a704421:
+    resolution: {tarball: https://codeload.github.com/ottypes/json0/tar.gz/90a3ae26364c4fa3b19b6df34dad46707a704421}
+    name: ot-json0
+    version: 1.1.0
+    dev: true
 
   registry.npmmirror.com/@aashutoshrathi/word-wrap@1.2.6:
     resolution: {integrity: sha512-1Yjs2SvM8TflER/OD3cOjhWWOZb58A2t7wpE2S9XfBYTiIl+XFhQG2bjy4Pu1I+EAlCNUzRDYDdFwFYUKvXcIA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@aashutoshrathi/word-wrap/-/word-wrap-1.2.6.tgz}

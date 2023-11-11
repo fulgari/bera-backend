@@ -5,4 +5,4 @@ function errWrap (fn) {
   }
 }
 
-export { errWrap };
+module.exports = { errWrap };

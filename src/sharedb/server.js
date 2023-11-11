@@ -9,13 +9,14 @@ const { makeHandlerAwareOfAsyncErrors } = require('../express/utils')
 const { loginInRequiredMw } = require('../../src/auth');
 const { TEST_DOC_ID } = require('./constants');
 const { errWrap } = require('./utils');
-const json0v2 = require('ot-json0-v2').type;
-
-ShareDB.types.register(json0v2); // json0 不支持 li 操作在数组中插入 objects，只能插入 string
+const json0 = require('ot-json0').type;
 
 const shareDbOptions = {
   db: { host: dbConfig.host, user: dbConfig.user, password: dbConfig.password, database: dbConfig.db, connectionLimit: dbConfig.pool.max }, ops_table: 'ops', snapshots_table: 'snapshots', debug: true
 }
+
+ShareDB.types.register(json0); // json0 不支持 li 操作在数组中插入 objects，只能插入 string
+ShareDB.types.defaultType = (json0);
 
 function initShareDB (app) {
   // Start ShareDB
@@ -39,16 +40,13 @@ function initShareDB (app) {
 
   // middlewares
   const queryTodo = (req, res) => {
-    console.log('queryTodo)=>req.body', req.body)
     const doc = connection.get('todorecords', TEST_DOC_ID);
     doc.fetch(errWrap(() => {
-      console.log('[doc.data]', doc.data)
       res.status(200).send(doc.data)
     }))
   }
 
   const createTodo = (req, res) => {
-    console.log('createTodo)=>req.body', req.body)
     if (req.body.id) {
       res
         .status(400)
@@ -56,7 +54,6 @@ function initShareDB (app) {
     } else {
       const doc = connection.get('todorecords', TEST_DOC_ID);
       doc.fetch(errWrap(() => {
-        console.log('create doc.data', doc.data)
         if (!doc.data) {
           const obj = {
             id: 0,
