@@ -2,14 +2,16 @@
  * @ Author: pzij
  * @ Create Time: 2023-07-31 23:21:12
  * @ Modified by: pzij
- * @ Modified time: 2023-08-16 12:43:27
+ * @ Modified time: 2023-11-09 00:42:08
  * @ Description: unified entry of routes
  */
 
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const { makeHandlerAwareOfAsyncErrors } = require('./utils')
 const { retrieveAuthMw, loginInRequiredMw, userRoute } = require('../auth/index.js');
+const initShareDB = require('../sharedb/server');
 
 const routes = {
   users: require('./routes/users.js'),
@@ -44,19 +46,6 @@ app.use(bodyParser.urlencoded());
 /** auth */
 app.use(retrieveAuthMw);
 
-// We create a wrapper to workaround async errors not being transmitted correctly.
-function makeHandlerAwareOfAsyncErrors (handler) {
-  return async function (req, res, next) {
-    try {
-      res.setHeader('Content-Type', 'application/json');
-      res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
-      await handler(req, res);
-    } catch (error) {
-      next(error);
-    }
-  };
-}
-
 // We provide a root route just as an example
 app.get('/', (req, res) => {
   res.send(`
@@ -71,6 +60,8 @@ userRoute(app);
 
 // We define the standard REST APIs for each route (if they exist).
 for (const [routeName, routeController] of Object.entries(routes)) {
+  if (routeName === 'todorecord') break
+
   // get http://localhost:9001/api/todorecord/
   if (routeController.getAll) {
     app.get(`/api/${routeName}`, loginInRequiredMw, makeHandlerAwareOfAsyncErrors(routeController.getAll));
@@ -100,5 +91,7 @@ for (const [routeName, routeController] of Object.entries(routes)) {
     app.delete(`/api/${routeName}/:id`, loginInRequiredMw, makeHandlerAwareOfAsyncErrors(routeController.remove));
   }
 }
+
+initShareDB(app)
 
 module.exports = app;
