@@ -1,7 +1,6 @@
-const http = require('http');
 const ShareDB = require('sharedb');
 const express = require('express');
-const ShareDBMysqlMemory = require('./sharedb-mysql');
+const mysqlDB = require('./sharedb-mysql');
 const WebSocketJSONStream = require('@teamwork/websocket-json-stream');
 const WebSocket = require('ws');
 const dbConfig = require('../database/mysql-example-database/config/db.config');
@@ -15,19 +14,18 @@ const shareDbOptions = {
   db: { host: dbConfig.host, user: dbConfig.user, password: dbConfig.password, database: dbConfig.db, connectionLimit: dbConfig.pool.max }, ops_table: 'ops', snapshots_table: 'snapshots', debug: true
 }
 
-ShareDB.types.register(json0); // json0 不支持 li 操作在数组中插入 objects，只能插入 string
+ShareDB.types.register(json0); // 内置的 json0 不支持 li 操作在数组中插入 objects，只能插入 string
 ShareDB.types.defaultType = (json0);
 
-function initShareDB (app) {
+function initShareDbWss (app) {
   // Start ShareDB
-  const backend = new ShareDB({ db: new ShareDBMysqlMemory(shareDbOptions) });
+  const backend = new ShareDB({ db: mysqlDB(shareDbOptions) });
 
   // Create a WebSocket server
   // const app = express();
   app.use(express.static('static'));
 
-  const server = http.createServer(app);
-  const wss = new WebSocket.Server({ server });
+  const wss = new WebSocket.Server({ noServer: true });
 
   // Connect any incoming WebSocket connection with ShareDB
   wss.on('connection', function (ws) {
@@ -60,20 +58,18 @@ function initShareDB (app) {
             ...req.body
           };
           req.body = obj;
-          const data = {
-            doc_content: [obj]
-          }
+          const data = [obj]
           doc.create(data, errWrap(() => {
             res.status(200).send(doc.data)
           }))
         } else {
           const { data } = doc;
-          const idx = data.doc_content.length;
+          const idx = data.length;
           const obj = {
             id: idx,
             ...req.body
           };
-          const addOp = [{ p: ['doc_content', idx], li: obj }]
+          const addOp = [{ p: [idx], li: obj }]
           doc.submitOp(addOp, {}, errWrap(() => {
             res.status(200).send(doc.data)
           }))
@@ -93,8 +89,8 @@ function initShareDB (app) {
           .send(`Bad request: invalid ID ${id}`);
         return;
       }
-      const originIdx = data.doc_content?.findIndex((item) => item?.id === id)
-      const originObj = data.doc_content?.[originIdx];
+      const originIdx = data?.findIndex((item) => item?.id === id)
+      const originObj = data?.[originIdx];
       successCb?.(doc, originIdx, originObj);
     }))
   }
@@ -102,7 +98,7 @@ function initShareDB (app) {
   const updateTodo = (req, res) => {
     findTodo(req, res, (doc, originIdx, originObj) => {
       const obj = req.body;
-      const op = [{ p: ['doc_content', originIdx], ld: originObj, li: obj }]
+      const op = [{ p: [originIdx], ld: originObj, li: obj }]
       doc.submitOp(op, {}, errWrap(() => {
         res.status(200).send(doc.data);
       }))
@@ -111,7 +107,7 @@ function initShareDB (app) {
 
   const deleteTodo = (req, res) => {
     findTodo(req, res, (doc, originIdx, originObj) => {
-      const op = [{ p: ['doc_content', originIdx], ld: originObj }]
+      const op = [{ p: [originIdx], ld: originObj }]
       doc.submitOp(op, {}, errWrap(() => {
         res.status(200).send(doc.data);
       }))
@@ -122,6 +118,10 @@ function initShareDB (app) {
   app.post('/api/todorecord', loginInRequiredMw, makeHandlerAwareOfAsyncErrors(createTodo));
   app.put('/api/todorecord', loginInRequiredMw, makeHandlerAwareOfAsyncErrors(updateTodo));
   app.delete('/api/todorecord', loginInRequiredMw, makeHandlerAwareOfAsyncErrors(deleteTodo));
+
+  return {
+    wss
+  }
 }
 
-module.exports = initShareDB
+module.exports = initShareDbWss

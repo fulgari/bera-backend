@@ -2,7 +2,7 @@
  * @ Author: pzij
  * @ Create Time: 2023-07-31 23:21:12
  * @ Modified by: pzij
- * @ Modified time: 2023-11-09 00:42:08
+ * @ Modified time: 2023-11-18 22:55:40
  * @ Description: unified entry of routes
  */
 
@@ -11,7 +11,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const { makeHandlerAwareOfAsyncErrors } = require('./utils')
 const { retrieveAuthMw, loginInRequiredMw, userRoute } = require('../auth/index.js');
-const initShareDB = require('../sharedb/server');
+const initShareDbWss = require('../sharedb/server');
 
 const routes = {
   users: require('./routes/users.js'),
@@ -92,6 +92,9 @@ for (const [routeName, routeController] of Object.entries(routes)) {
   }
 }
 
-initShareDB(app)
+const { wss } = initShareDbWss(app)
 
-module.exports = app;
+module.exports = {
+  app,
+  wss
+};
