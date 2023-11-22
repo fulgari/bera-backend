@@ -17,8 +17,8 @@ const devConfig = {
 };
 
 const prodConfig = {
-  host: env.DB_PROD_HOST,
-  user: env.DB_PROD_USERNAME,
+  host: process.env.DB_PROD_HOST || env.DB_PROD_HOST,
+  user: process.env.DB_PROD_USERNAME || env.DB_PROD_USERNAME,
   password: process.env.DB_PASSWORD || env.DB_PASSWORD,
   db: 'bera_auth_db',
   dialect: 'mysql',
