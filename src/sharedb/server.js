@@ -36,6 +36,17 @@ function initShareDbWss (app) {
   // Create initial documents
   const connection = backend.connect();
 
+  const initDoc = () => {
+    const doc = connection.get('todorecords', TEST_DOC_ID);
+    doc.fetch(errWrap(() => {
+      if (!doc.data) {
+        const data = []
+        doc.create(data)
+      }
+    }))
+  }
+  initDoc();
+
   // middlewares
   const queryTodo = (req, res) => {
     const doc = connection.get('todorecords', TEST_DOC_ID);
